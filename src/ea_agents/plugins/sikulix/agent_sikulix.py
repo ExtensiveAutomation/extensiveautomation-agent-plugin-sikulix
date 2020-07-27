@@ -44,47 +44,6 @@ proxy_handler = requestlib.ProxyHandler({})
 opener = requestlib.build_opener(proxy_handler)
 requestlib.install_opener(opener)
 
-
-# try:
-    # xrange
-# except NameError: # support python3
-    # xrange = range
-
-# unicode = str with python3
-# if sys.version_info > (3,):
-    # unicode = str
-    
-
-# __TOOL_TYPE__ = GenericTool.TOOL_AGENT
-# __WITH_IDE__ = True
-  
-# __APP_PATH__ = '%s\%s\%s' % (Settings.getDirExec(), 
-                             # Settings.get('Paths', 'bin'), 
-                             # Settings.get('BinWin', 'sikuli') )
-# if sys.platform == "linux2": __APP_PATH__ = Settings.get('BinLinux', 'sikulix')
-
-# __TYPE__="""sikulix-server"""
-# __RESUME__="""Just a dummy agent. Use only for development.
-# Can be used on Linux or Windows."""
-
-# __DESCRIPTION__="""Example, just a dummy agent.
-# This agent enables to receive or send data from or to the test server.
-
-# Events messages:
-    # Agent->Server
-        # * Error(data)
-        # * Notify(data)
-        # * Data(data)
-
-    # Server->Agent
-        # * Init(data)
-        # * Notify(data)
-        # * Reset(data)
-
-# The data argument can contains anything, but a dictionary is prefered.
-
-# Targetted operating system: Windows, Linux"""
-
 CODE_OK = 0
 CODE_ERROR = 1
 CODE_GET = 2
@@ -168,34 +127,9 @@ class SikulixServer(GenericTool.Tool):
         """
         if self.sikulixProcess is not None:
             logging.debug("sikulix server already started")
-            # self.onPluginStarted()
         else:
             self.startProcess()
 
-    # def pluginStarting(self):
-        # """
-        # Function to reimplement
-        # """
-        # pass
-    
-    # def onPluginStarted(self):
-        # """
-        # Function to reimplement
-        # """  
-        # pass
-    
-    # def stopProcess(self):
-        # """
-        # Stop the process
-        # """
-        # logging.info("Stopping Sikulix Server...")
-        # try:
-            # thread = threading.Thread(target = self.__stopProcess )
-            # thread.start()
-            # thread.join()   
-        # except Exception as e:
-            # logging.error( "unable to make a thread to stop process: %s" % e )
-        
     def __stopProcess(self):
         """
         Internal function to stop the process
@@ -340,100 +274,7 @@ class SikulixServer(GenericTool.Tool):
                             # self.onResetAgentCalled()
             else:
                 logging.error( "unable to configure Sikulix Server server: %s" % response)  
-                # self.onResetAgentCalled()
 
-    # def pluginStopped(self):
-        # """
-        # Function to reimplement
-        # """
-        # pass
-
-    # def onResetAgentCalled(self):
-        # """
-        # Function to reimplement
-        # """
-        # pass
-        
-    # def onToolLogWarningCalled(self, msg):
-        # """
-        # Logs warning on main application
-
-        # @param msg: warning message
-        # @type msg: string
-        # """
-        # pass
-
-    # def onToolLogErrorCalled(self, msg):
-        # """
-        # Logs error on main application
-
-        # @param msg: error message
-        # @type msg: string
-        # """
-        # pass
-
-    # def onToolLogSuccessCalled(self, msg):
-        # """
-        # Logs success on main application
-
-        # @param msg: error message
-        # @type msg: string
-        # """
-        # pass
-    
-    # def onAgentAlive(self, client, tid, request):
-        # """
-        # Called on keepalive received from test server
-        # {'task-id': 'xx', 'from': 'tester', 'destination-agent': 'xxxxx', 'source-adapter': 'xx', 
-        # 'script-name': 'xxxx', 'script_id': 'xxx', 'data': 'xxx', 'event': 'agent-init', 'test-id': 'xxx'}
-
-        # @param client: server address ip/port
-        # @type client: tuple
-
-        # @param tid: transaction id
-        # @type tid: integer
-
-        # @param request: request received from the server
-        # @type request: dict
-        # """
-        # pass
-        
-    # def onAgentInit(self, client, tid, request):
-        # """
-        # Called on init received from test server
-        # {'task-id': 'xx', 'from': 'tester', 'destination-agent': 'xxxxx', 'source-adapter': 'xx', 
-        # 'script-name': 'xxxx', 'script_id': 'xxx', 'data': 'xxx', 'event': 'agent-init', 'test-id': 'xxx'}
-
-        # @param client: server address ip/port
-        # @type client: tuple
-
-        # @param tid: transaction id
-        # @type tid: integer
-
-        # @param request: request received from the server
-        # @type request: dict
-        # """
-        # pass
-
-    # def onAgentReset(self, client, tid, request):
-        # """
-        # Called on reset received from test server
-        # {'task-id': 'xx', 'from': 'tester', 'destination-agent': 'xxxxx', 'source-adapter': 'xx', 
-        # 'script-name': 'xxxx', 'script_id': 'xxx', 'data': 'xxx', 'event': 'agent-init', 'test-id': 'xxx'}
-        # or 
-        # {'event': 'agent-reset', 'source-adapter': '1', 'script_id': '7_3_0'}
-        
-        # @param client: server address ip/port
-        # @type client: tuple
-
-        # @param tid: transaction id
-        # @type tid: integer
-
-        # @param request: request received from the server
-        # @type request: dict
-        # """
-        # pass
-            
     def onAgentNotify(self, client, tid, request):
         """
         Called on notify received from test server and dispatch it
@@ -460,49 +301,7 @@ class SikulixServer(GenericTool.Tool):
         else:
             logging.error("Test context does not exits ScriptId=%s" % request['uuid'])
         self.__mutex__.release()
-        
-    # def takeScreenshot(self, request, action, actionId, adapterId, testcaseName, replayId=0):
-        # """
-        # Take a screenshot
-        # """
-        # logging.debug('taking a screenshot')
 
-        # if sys.platform == "win32" :
-            # self.onTakeScreenshot(request, action, str(actionId), str(adapterId), 
-                                    # testcaseName, int(replayId) )
-        # elif sys.platform == "linux2" and not self.getFromCmd() :
-            # self.onTakeScreenshot(request, action, str(actionId), str(adapterId), 
-                                    # testcaseName, int(replayId) )
-        # else:
-            # logging.error( 'take screenshot not supported on system=%s from cmd=%s' %  (sys.platform, self.getFromCmd()) )
-        
-    # def onFinalizeScreenshot(self, request, action, actionId, adapterId, testcaseName, replayId, screenshot, thumbnail):
-        # """
-        # On finalize the screenshot procedure
-        # """
-        # logging.debug('ReplayId=%s screenshot size=%s and thumbnail size=%s' % (replayId, len(screenshot), len(thumbnail)) )
-        
-        # extension = Settings.get( 'Screenshot', 'extension' )
-        # fileName = "%s_%s_ADP%s_step%s_%s.%s" % (testcaseName, replayId, request['source-adapter'], 
-                                                 # actionId, action, extension.lower())
-
-        # send screenshot
-        # if 'result-path' in request: 
-            # logging.info( "<< Uploading screenshot...")
-            # self.uploadData(fileName=fileName,  resultPath=request['result-path'], data=screenshot ) 
-
-        # send through notify only a thumbnail
-        # try:
-            # self.sendData(request=request, data={   'data': thumbnail, 
-                                                    # 'filename': '%s_%s.%s' % (action, actionId, extension),
-                                                    # 'action': action, 
-                                                    # 'action-id': "%s" % actionId, 
-                                                    # 'adapter-id': "%s" % adapterId  } )
-        # except Exception as e:
-            # logging.error("unable to send notify through notify: %s" % e)
-            
-        # logging.debug('screenshot sent')  
-        
     def execAction(self, request):
         """
         Exec action
@@ -517,14 +316,6 @@ class SikulixServer(GenericTool.Tool):
         # dispatch action
         if request['data']['action'] == 'SCREENSHOT':
             pass
-            # self.takeScreenshot(
-                                    # request=request, 
-                                    # action=request['data']['action'], 
-                                    # actionId=request['data']['action-id'], 
-                                    # adapterId=request['source-adapter'],
-                                    # testcaseName=request['testcase-name'], 
-                                    # replayId=request['test-replay-id']
-                                # )
         else:
             # run sikuli script
             if os.path.exists("%s/%s.sikuli" % (self.homeFolder, self.nameFolder) ):
@@ -620,13 +411,6 @@ class SikulixServer(GenericTool.Tool):
                                                                     'output': debug_log
                                                                 } 
                                                         )
-                                            # self.takeScreenshot(
-                                                                    # request=request, action=request['data']['action'], 
-                                                                    # actionId=request['data']['action-id'], 
-                                                                    # adapterId=request['source-adapter'],
-                                                                    # testcaseName=request['testcase-name'], 
-                                                                    # replayId=request['test-replay-id']
-                                                                # )  
                                                             
                                     elif returnCode == CODE_GET:
                                         
