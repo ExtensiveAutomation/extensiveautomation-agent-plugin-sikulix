@@ -22,7 +22,7 @@
 
 import setuptools
 
-VERSION="1.0.0"
+VERSION="1.0.1"
 
 with open("README.md", "r") as fh:
     LONG_DESCRIPTION = fh.read()
@@ -51,7 +51,6 @@ setuptools.setup(
         "Topic :: Software Development :: Testing :: Acceptance"
     ],
     install_requires=[
-        "extensiveautomation_agent",
-        "urllib2"
+        "extensiveautomation_agent"
     ]
 )

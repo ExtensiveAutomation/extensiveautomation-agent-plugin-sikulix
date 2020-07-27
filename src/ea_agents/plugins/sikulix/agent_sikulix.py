@@ -37,12 +37,7 @@ import os
 import socket
 import shutil
 import logging
-
-# import urllib to use it with device
-try:
-    import urllib2 as requestlib
-except ImportError: # support python 3
-    from urllib import request as requestlib
+from urllib import request as requestlib
     
 # disable system proxy for urllib, use only in localhost
 proxy_handler = requestlib.ProxyHandler({})
